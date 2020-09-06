@@ -1,12 +1,22 @@
 import React from 'react';
 import './App.css';
 import SearchIcon from '@skbkontur/react-icons/Search'
+import AddIcon from '@skbkontur/react-icons/Add'
+import RemoveIcon from '@skbkontur/react-icons/Remove'
 import { Button } from '@skbkontur/react-ui';
 
 function App() {
   const links = words.map(w => (
     <div class='wordDiv'>
-      <a href={`${searchLink}${encode(w)}`}>{w}</a>
+      <a class='searchLink' href={`${searchLink}${encode(w)}`}>{w}</a>
+      <span class='plusMinusButtons'>
+        <span class='button' >
+          <Button icon={<AddIcon />} use='link' />
+        </span>
+        <span class='button' >
+          <Button icon={<RemoveIcon />} use='link' />
+        </span>
+      </span>
       <a class='exampleLink' href={`${googleLink}"${encode(w)}"`}>
         <SearchIcon />
       </a>

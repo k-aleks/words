@@ -3,6 +3,16 @@
   margin: 20px;
 }
 
+.searchLink {
+  font-size: 21px;
+  color: black;
+  text-decoration: none;
+}
+
+.searchLink:hover {
+  color: darkorange;
+}
+
 .wordsList {
   margin-left: 200px;
   margin-top: 50px;
@@ -12,4 +22,24 @@
   margin-left: 10px;
   color: black;
   text-decoration: none;
+}
+
+.exampleLink:hover {
+  color: darkorange;
+}
+
+.plusMinusButtons {
+  margin-left: 20px;
+}
+.plusMinusButtons {
+  margin-left: 20px;
+}
+
+.button {
+  margin-left: 5px;
+}
+
+.button:hover {
+  margin-left: 5px;
+  color: darkorange;
 }
