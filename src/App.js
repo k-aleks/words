@@ -1,26 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const links = words.map(w => (
+    <div class='wordDiv'>
+      <a href={`${searchLink}${encode(w)}`}>{w}</a>
+    </div>
+  ));
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div class='wordsListDiv'>
+      {links}
     </div>
   );
 }
+
+const encode = (str) => {
+  return encodeURI(str);
+}
+
+const searchLink = 'https://www.macmillandictionary.com/search/british/direct/?q='
+
+const words = [
+  "scratch out",
+  "beef up",
+  "pitch",
+  "pun"
+]
 
 export default App;
