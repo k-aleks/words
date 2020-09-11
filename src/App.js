@@ -1,9 +1,9 @@
 import React from 'react';
-import './App.css';
+import styles from './App.css';
 import SearchIcon from '@skbkontur/react-icons/Search'
 import AddIcon from '@skbkontur/react-icons/Add'
 import RemoveIcon from '@skbkontur/react-icons/Remove'
-import { Button } from '@skbkontur/react-ui';
+import { Button, Input } from '@skbkontur/react-ui';
 import { getWords } from './storage/dynamo';
 
 class App extends React.Component {
@@ -19,25 +19,30 @@ class App extends React.Component {
 
   render() {
     const links = this.state.words.map(w => (
-      <div class='wordDiv'>
-        <a class='searchLink' href={`${searchLink}${encode(w.word)}`}>{w.word}</a>
-        <span class='plusMinusButtons'>
-          <span class='button' >
+      <div className='wordsDiv' key={w.word}>
+        <a className='searchLink' href={`${searchLink}${encode(w.word)}`}>{w.word}</a>
+        <span className='plusMinusButtons'>
+          <span className='button' >
             <Button icon={<AddIcon />} use='link' />
           </span>
-          <span class='button' >
+          <span className='button' >
             <Button icon={<RemoveIcon />} use='link' />
           </span>
         </span>
-        <a class='exampleLink' href={`${googleLink}"${encode(w.word)}"`}>
+        <a className='exampleLink' href={`${googleLink}"${encode(w.word)}"`}>
           <SearchIcon />
         </a>
       </div>
     ));
 
     return (
-      <div class='wordsList'>
-        {links}
+      <div>
+        <div className='input'>
+          <Input leftIcon={<AddIcon />} />
+        </div>
+        <div className='wordsList'>
+          {links}
+        </div>
       </div>
     );
   }
