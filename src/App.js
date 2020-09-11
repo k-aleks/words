@@ -4,22 +4,27 @@ import SearchIcon from '@skbkontur/react-icons/Search'
 import AddIcon from '@skbkontur/react-icons/Add'
 import RemoveIcon from '@skbkontur/react-icons/Remove'
 import { Button, Input } from '@skbkontur/react-ui';
-import { getWords } from './storage/dynamo';
+import { getWords, addNewWord } from './storage/dynamo';
 
 class App extends React.Component {
   constructor() {
     super();
-    this.state = { words: [] };
+    this.state = {
+      newWord: '',
+      words: []
+    };
+    this.onNewWordInputChange = this.onNewWordInputChange.bind(this);
+    this.onWordAddButtonClick = this.onWordAddButtonClick.bind(this);
+    this.readWordsFromDatabase = this.readWordsFromDatabase.bind(this);
   }
 
   async componentDidMount() {
-    const words = await getWords();
-    this.setState({ words });
+    await this.readWordsFromDatabase();
   }
 
   render() {
     const links = this.state.words.map(w => (
-      <div className='wordsDiv' key={w.word}>
+      <div className='wordDiv' key={w.word}>
         <a className='searchLink' href={`${searchLink}${encode(w.word)}`}>{w.word}</a>
         <span className='plusMinusButtons'>
           <span className='button' >
@@ -37,8 +42,18 @@ class App extends React.Component {
 
     return (
       <div>
-        <div className='input'>
-          <Input leftIcon={<AddIcon />} />
+        <div className='inputBlock'>
+          <div>
+            <span>
+              <Input className='input' size='medium' onValueChange={this.onNewWordInputChange} value={this.state.newWord} />
+            </span>
+            <span className='addButton'>
+              <Button icon={<AddIcon />} use='default' onClick={this.onWordAddButtonClick}>add word</Button>
+            </span>
+          </div>
+          <div className='inputLink'>
+            <a href={`${searchLink}${encode(this.state.newWord)}`}>{this.state.newWord}</a>
+          </div>
         </div>
         <div className='wordsList'>
           {links}
@@ -46,7 +61,25 @@ class App extends React.Component {
       </div>
     );
   }
+
+  async readWordsFromDatabase() {
+    const words = await getWords();
+    this.setState({ words });
+  }
+
+  onNewWordInputChange(value) {
+    this.setState({ newWord: value })
+  }
+
+  async onWordAddButtonClick() {
+    const newWord = this.state.newWord;
+    console.log('Adding new word: ' + newWord);
+    await addNewWord(newWord);
+    this.setState({ newWord: '' })
+    await this.readWordsFromDatabase();
+  }
 }
+
 
 const encode = (str) => {
   return encodeURI(str);
@@ -56,8 +89,6 @@ const searchLink = 'https://www.macmillandictionary.com/search/british/direct/?q
 const googleLink = 'https://www.google.com/search?tbm=nws&q='
 
 const words = [
-  "scratch out",
-  "beef up",
   "pitch",
   "pun",
   "impasse",

@@ -1,6 +1,6 @@
 
 .wordDiv {
-  margin: 20px;
+  margin-top: 20px;
 }
 
 .searchLink {
@@ -44,7 +44,22 @@
   color: darkorange;
 }
 
-.input {
+.inputBlock {
   margin-left: 200px;
   margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  font-size: 21px; 
+}
+
+.inputLink {
+  margin-top: 10px;
+  margin-left: 3px;
+}
+
+.addButton {
+  margin-left: 10px;
 }
