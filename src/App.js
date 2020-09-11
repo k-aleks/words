@@ -4,29 +4,43 @@ import SearchIcon from '@skbkontur/react-icons/Search'
 import AddIcon from '@skbkontur/react-icons/Add'
 import RemoveIcon from '@skbkontur/react-icons/Remove'
 import { Button } from '@skbkontur/react-ui';
+import { getWords } from './storage/dynamo';
 
-function App() {
-  const links = words.map(w => (
-    <div class='wordDiv'>
-      <a class='searchLink' href={`${searchLink}${encode(w)}`}>{w}</a>
-      <span class='plusMinusButtons'>
-        <span class='button' >
-          <Button icon={<AddIcon />} use='link' />
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = { words: [] };
+  }
+
+  async componentDidMount() {
+    const words = await getWords();
+    this.setState({ words });
+  }
+
+  render() {
+    const links = this.state.words.map(w => (
+      <div class='wordDiv'>
+        <a class='searchLink' href={`${searchLink}${encode(w.word)}`}>{w.word}</a>
+        <span class='plusMinusButtons'>
+          <span class='button' >
+            <Button icon={<AddIcon />} use='link' />
+          </span>
+          <span class='button' >
+            <Button icon={<RemoveIcon />} use='link' />
+          </span>
         </span>
-        <span class='button' >
-          <Button icon={<RemoveIcon />} use='link' />
-        </span>
-      </span>
-      <a class='exampleLink' href={`${googleLink}"${encode(w)}"`}>
-        <SearchIcon />
-      </a>
-    </div>
-  ));
-  return (
-    <div class='wordsList'>
-      {links}
-    </div>
-  );
+        <a class='exampleLink' href={`${googleLink}"${encode(w.word)}"`}>
+          <SearchIcon />
+        </a>
+      </div>
+    ));
+
+    return (
+      <div class='wordsList'>
+        {links}
+      </div>
+    );
+  }
 }
 
 const encode = (str) => {
@@ -55,7 +69,14 @@ const words = [
   "undertake",
   "outline",
   "the nuts and bolts",
-  "remainder"
+  "remainder",
+  "holistic",
+  "yield",
+  "factor in",
+  "intricate",
+  "wrt",
+  "lmk",
+  "resent"
 ]
 
 export default App;
