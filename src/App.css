@@ -9,6 +9,16 @@
   text-decoration: none;
 }
 
+.score {
+  margin-left: 20px;
+  font-size: 16px;
+  color: gray;
+}
+
+.plusMinusButtons {
+  margin-left: 10px;
+}
+
 .searchLink:hover {
   color: darkorange;
 }
@@ -26,13 +36,6 @@
 
 .exampleLink:hover {
   color: darkorange;
-}
-
-.plusMinusButtons {
-  margin-left: 20px;
-}
-.plusMinusButtons {
-  margin-left: 20px;
 }
 
 .button {

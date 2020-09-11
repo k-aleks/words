@@ -31,6 +31,20 @@ export async function addNewWord(newWord) {
     console.log('Put document in DynamoDB: ' + JSON.stringify(res))
 }
 
+export async function incrementScore(wordToUpdate, inc) {
+    const ddb = getDynamoDocumentClient();
+    var params = {
+        TableName: TABLE_NAME,
+        Item: {
+            word: wordToUpdate.word,
+            score: wordToUpdate.score + inc,
+            dateAdded: new Date()
+        }
+    };
+    const res = await ddb.put(params).promise();
+    console.log('Put document in DynamoDB with increased score: ' + JSON.stringify(res))
+}
+
 function getDynamoDocumentClient() {
     const options = {
         credentials: {

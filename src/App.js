@@ -4,7 +4,7 @@ import SearchIcon from '@skbkontur/react-icons/Search'
 import AddIcon from '@skbkontur/react-icons/Add'
 import RemoveIcon from '@skbkontur/react-icons/Remove'
 import { Button, Input } from '@skbkontur/react-ui';
-import { getWords, addNewWord } from './storage/dynamo';
+import { getWords, addNewWord, incrementScore } from './storage/dynamo';
 
 class App extends React.Component {
   constructor() {
@@ -16,6 +16,7 @@ class App extends React.Component {
     this.onNewWordInputChange = this.onNewWordInputChange.bind(this);
     this.onWordAddButtonClick = this.onWordAddButtonClick.bind(this);
     this.readWordsFromDatabase = this.readWordsFromDatabase.bind(this);
+    this.updateScore = this.updateScore.bind(this);
   }
 
   async componentDidMount() {
@@ -26,12 +27,13 @@ class App extends React.Component {
     const links = this.state.words.map(w => (
       <div className='wordDiv' key={w.word}>
         <a className='searchLink' href={`${searchLink}${encode(w.word)}`}>{w.word}</a>
+        <span className='score'>{w.score}</span>
         <span className='plusMinusButtons'>
           <span className='button' >
-            <Button icon={<AddIcon />} use='link' />
+            <Button icon={<AddIcon />} use='link' onClick={() => this.updateScore(w, 1)} />
           </span>
           <span className='button' >
-            <Button icon={<RemoveIcon />} use='link' />
+            <Button icon={<RemoveIcon />} use='link' onClick={() => this.updateScore(w, -1)} />
           </span>
         </span>
         <a className='exampleLink' href={`${googleLink}"${encode(w.word)}"`}>
@@ -62,8 +64,14 @@ class App extends React.Component {
     );
   }
 
+  async updateScore(word, inc) {
+    await incrementScore(word, inc);
+    await this.readWordsFromDatabase();
+  }
+
   async readWordsFromDatabase() {
     const words = await getWords();
+    words.sort((a, b) => a.score - b.score);
     this.setState({ words });
   }
 
@@ -89,7 +97,6 @@ const searchLink = 'https://www.macmillandictionary.com/search/british/direct/?q
 const googleLink = 'https://www.google.com/search?tbm=nws&q='
 
 const words = [
-  "pitch",
   "pun",
   "impasse",
   "leftover",
