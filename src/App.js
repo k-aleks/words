@@ -5,7 +5,8 @@ import AddIcon from '@skbkontur/react-icons/Add'
 import RemoveIcon from '@skbkontur/react-icons/Remove'
 import { Button, Input } from '@skbkontur/react-ui';
 //import { getWords, addNewWord, incrementScore } from './storage/dynamo';
-import { getWords, addNewWord, incrementScore } from './storage/test-storage';
+//import { getWords, addNewWord, incrementScore } from './storage/test-storage';
+import { getWords, addNewWord, incrementScore } from './storage/local-storage';
 
 class App extends React.Component {
   constructor() {
