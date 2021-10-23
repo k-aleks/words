@@ -1,6 +1,7 @@
 {
   "name": "words",
   "version": "0.1.0",
+  "homepage": "https://k-aleks.github.io/words",
   "private": true,
   "dependencies": {
     "@skbkontur/react-icons": "^4.3.1",
@@ -14,6 +15,8 @@
     "react-scripts": "^4.0.3"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts --openssl-legacy-provider build",
     "test": "react-scripts test",
@@ -33,5 +36,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^3.2.3"
   }
 }
