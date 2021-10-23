@@ -4,7 +4,8 @@ import SearchIcon from '@skbkontur/react-icons/Search'
 import AddIcon from '@skbkontur/react-icons/Add'
 import RemoveIcon from '@skbkontur/react-icons/Remove'
 import { Button, Input } from '@skbkontur/react-ui';
-import { getWords, addNewWord, incrementScore } from './storage/dynamo';
+//import { getWords, addNewWord, incrementScore } from './storage/dynamo';
+import { getWords, addNewWord, incrementScore } from './storage/test-storage';
 
 class App extends React.Component {
   constructor() {
@@ -96,30 +97,5 @@ const encode = (str) => {
 const searchLink = 'https://www.macmillandictionary.com/search/british/direct/?q='
 const googleLink = 'https://www.google.com/search?tbm=nws&q='
 
-const words = [
-  "pun",
-  "impasse",
-  "leftover",
-  "shortcoming",
-  "fuss",
-  "entail",
-  "be intended for",
-  "puzzle out",
-  "puzzle over",
-  "get across",
-  "bits and bobs",
-  "head for",
-  "undertake",
-  "outline",
-  "the nuts and bolts",
-  "remainder",
-  "holistic",
-  "yield",
-  "factor in",
-  "intricate",
-  "wrt",
-  "lmk",
-  "resent"
-]
 
 export default App;
