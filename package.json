@@ -1,7 +1,7 @@
 {
   "name": "words",
   "version": "0.1.0",
-  "homepage": "https://k-aleks.github.io/words",
+  "homepage": "https://k-aleks.github.io",
   "private": true,
   "dependencies": {
     "@skbkontur/react-icons": "^4.3.1",
